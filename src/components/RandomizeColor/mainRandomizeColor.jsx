@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Title from "../Esignature/title.jsx";
 
-function MainRandomizeColor(props) {
+function MainRandomizeColor() {
     const [colorChangeCount, setColorChangeCount] = useState(0);
 
     const handelClick = ()=>{
@@ -21,11 +21,11 @@ function MainRandomizeColor(props) {
             let body = document.querySelector('html');
             body.style.backgroundColor = randomColor();
             console.log(randomColor());
-            setColorChangeCount(prev => prev + 1); // Update state to trigger next color change
+            setColorChangeCount(prev => prev + 1); // Update state to trigger nextcolorchange
         },1500)
         return ()=>clearTimeout(timer)
     },[colorChangeCount])
-    const randonHex=()=>`#${Math.floor(Math.random()*16777215).toString(16)}`
+    const randonHex=()=>`#${Math.floor(Math.random()*0xffffff).toString(16)}`
     return (
         <>
         <Title name={"Randomize Color"}/>
