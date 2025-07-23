@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Title from "../Esignature/title.jsx";
-import Button from "./Button.jsx";
+import ButtonClass from "./ButtonClass.jsx";
 import {BsFillFileEarmarkPostFill} from "react-icons/bs";
 import {FaUserAlt} from "react-icons/fa";
 import {BiCommentDetail, BiEdit} from "react-icons/bi";
@@ -19,10 +19,10 @@ function NewTestimonial() {
     return (
         <>
         <Title name={"New Testimonial"}/>
-            <Button text={"Posts"} classes={"btn btn-success"} icon={<BsFillFileEarmarkPostFill/>} onClick={()=>setTestimonials("posts")}/>
-            &#160;<Button text={"User"} classes={"btn btn-success"} icon={<FaUserAlt/>} onClick={()=>setTestimonials("users")}/>
-            &#160; <Button text={"Comment"} classes={"btn btn-success"} icon={<BiCommentDetail/>} onClick={()=>setTestimonials("Comments")}/>
-            &#160; <Button text={"Extra"} classes={"btn btn-success"} icon={<BiEdit/>} onClick={()=>setTestimonials("Albums")}/>
+            <ButtonClass text={"Posts"} classes={"btn btn-success"} icon={<BsFillFileEarmarkPostFill/>} onClick={()=>setTestimonials("posts")}/>
+            &#160;<ButtonClass text={"User"} classes={"btn btn-success"} icon={<FaUserAlt/>} onClick={()=>setTestimonials("users")}/>
+            &#160; <ButtonClass text={"Comment"} classes={"btn btn-success"} icon={<BiCommentDetail/>} onClick={()=>setTestimonials("Comments")}/>
+            &#160; <ButtonClass text={"Extra"} classes={"btn btn-success"} icon={<BiEdit/>} onClick={()=>setTestimonials("Albums")}/>
 <Title name={!testimonials?"choose from the above":testimonials} classes={"text-primary text-5xl text-center mt-3"}/>
             {!items ? null:items.slice(0,10).map((item)=>{
                 return(

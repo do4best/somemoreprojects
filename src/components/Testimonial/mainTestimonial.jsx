@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Title from "../Esignature/title.jsx";
-import Button from "./Button.jsx";
+import ButtonClass from "./ButtonClass.jsx";
 import {BsFillFileEarmarkPostFill} from "react-icons/bs";
 import {FaUserAlt} from "react-icons/fa";
 import {BiCommentDetail} from "react-icons/bi";
@@ -22,10 +22,10 @@ function MainTestimonial() {
             <Title/> 
 
 
-                <Button icon={<BsFillFileEarmarkPostFill/>} text={"Posts"} classes="btn btn-success" onClick={()=>setTestimonials("post")}/>	&#160;
-            <Button icon={<FaUserAlt/>} text={"Users"}  classes="btn btn-success" onClick={()=>setTestimonials("user")}/>
+                <ButtonClass icon={<BsFillFileEarmarkPostFill/>} text={"Posts"} classes="btn btn-success" onClick={()=>setTestimonials("post")}/>	&#160;
+            <ButtonClass icon={<FaUserAlt/>} text={"Users"} classes="btn btn-success" onClick={()=>setTestimonials("user")}/>
             &#160;
-            <Button icon={<BiCommentDetail/>} text={"Comments"}  classes="btn btn-success" onClick={()=>setTestimonials("comment")}/>
+            <ButtonClass icon={<BiCommentDetail/>} text={"Comments"} classes="btn btn-success" onClick={()=>setTestimonials("comment")}/>
 <Title name={!testimonials ? "Select from the above" : testimonials.charAt(0).toUpperCase() + testimonials.slice(1) + "s"}/>
             {!items ? null : (
                 <div className="item-container" style={{ marginTop: '20px' }}>
