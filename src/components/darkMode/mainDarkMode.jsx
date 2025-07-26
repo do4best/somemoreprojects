@@ -5,22 +5,15 @@ import {ThemeContext} from "./themeContext.jsx";
 import {themes} from "./themeContext.jsx";
 
 function MainDarkMode() {
-    const [darkMode, setDarkMode] = useState(themes.light);
-    function changeTheme(){
-        darkMode === themes.light?setDarkMode(themes.dark):setDarkMode(themes.light);
-    }
-
-    useEffect(() => {
-        switch (darkMode) {
-            case themes.dark:
-                document.body.classList.add(" dark:text-white ");
-                document.body.classList.remove("light");
-                break;
-                case themes.light:
-                    document.body.classList.add("light");
-                    document.body.classList.remove("dark");
-        }
+    const [darkMode, setDarkMode] = useState(localStorage.getItem(themes.light)?localStorage.getItem(themes.light):themes.dark);
+    useEffect(()=>{
+        localStorage.setItem(themes.light,darkMode)
+        const locatheme = localStorage.getItem(themes.light)
+        document.querySelector('html').setAttribute('data-theme',locatheme)
     },[darkMode])
+const changeTheme=()=>{
+        setDarkMode(darkMode==themes.dark?themes.light:themes.dark)
+}
     return (
         <>
             <ThemeContext.Provider value={{darkMode,changeTheme}} >
