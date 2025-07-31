@@ -1,24 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import AnotherBlog from "./anotherBlog.jsx";
-import {ThemeContext,themes} from "./theme-context.js";
+import {ThemeContext, themes} from "./theme-context.js";
 
 
 
-function MainAnotherDark(props) {
-    const [darkMode, setDarkMode] = useState(themes.dark);
+function MainAnotherDark() {
+    const [darkMode, setDarkMode] = useState(themes.light);
 
     useEffect(()=>{
-      switch (darkMode){
-          case themes.dark:
-              document.querySelector('html').setAttribute('data-theme',darkMode)
-              break;
-              case themes.light:
-                  document.querySelector('html').setAttribute('data-theme',darkMode)
-              break;
-      }
+      document.querySelector('html').setAttribute('data-theme', darkMode);
     },[darkMode])
+    
     const changeTheme=()=>{
-        darkMode===themes.dark?setDarkMode(themes.light):setDarkMode(themes.dark)
+        setDarkMode(darkMode === themes.dark ? themes.light : themes.dark);
+        console.log(darkMode)
+        console.log(
+            document.querySelector('html').getAttribute('data-theme')
+        )
     }
     return (
         <>
