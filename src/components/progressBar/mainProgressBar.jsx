@@ -3,6 +3,7 @@ import Title from "../Esignature/title.jsx";
 import ProgressBar from "./progressBar.jsx";
 
 function MainProgressBar() {
+    const [completed,setCompleted]=React.useState(0)
     const [status,setStatus]=React.useState({
         ui:20,
         data:30,
@@ -22,7 +23,10 @@ function MainProgressBar() {
     const uiInput = useRef(null);
     useEffect(() => {
 uiInput.current.focus()
-    })
+        setInterval(()=>
+            setCompleted(Math.floor(Math.random()*100)+1),2000)
+
+    },[])
     return (
         <>
 
@@ -55,7 +59,7 @@ uiInput.current.focus()
                 <ProgressBar bgColor={item.bgColor} completed={item.completed} />
             </div>
         ))}
-
+        <ProgressBar bgColor={completed>50?'bg-warning':completed} completed={completed} />
     </div>
 </div>
         </>
