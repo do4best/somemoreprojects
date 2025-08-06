@@ -1,10 +1,15 @@
-const express = require('express');
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import {config} from "dotenv";
+import {router} from "./routes/authRoutes.js";
+
 const app = express();
-const cors = require('cors')
-const mongoose = require('mongoose')
-require('dotenv').config();
+
+config();
 app.use(cors());
 app.use(express.json())
+app.use('/api',router)
 mongoose.connect("mongodb://localhost:27017/todo").then((res)=>{
     console.log("connected to database");
 }).catch((err)=>{
