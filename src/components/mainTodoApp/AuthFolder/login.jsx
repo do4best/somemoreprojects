@@ -1,12 +1,33 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import Input from "daisyui/components/input/index.js";
+import AuthServices from "../Services/authServices.js";
+import {useNavigate} from "react-router";
 
-function Login(props) {
-    const [userNames,setUserNames] = useState("")
+function Login() {
+    const [username,setUserNames] = useState("")
     const [password,setPassword] = useState("")
-    const handelSubmit = ()=>{
+    const [loading,setLoading] = useState(false)
+    const navigate = useNavigate()
+    const handelSubmit = async ()=>{
         console.log("submit")
+        try{
+            setLoading(true)
+            let data = {
+                username:""+username+"",
+                password:""+password+""
+            }
+            const response = await AuthServices.loginService(data)
+            console.log(response.data)
+            localStorage.setItem("token",JSON.stringify(response.data))
+            console.log("token is set")
+            navigate("/todo")
+            setLoading(false)
+
+        }catch (e){
+            console.log(e.message)
+            setLoading(false)
+        }
     }
     return (
         <>
@@ -16,7 +37,7 @@ function Login(props) {
                     <h2 className="card-title text-center border-2 rounded-full p-5">Image</h2>
                     <h1>Login</h1>
 
-                    <input type="text" placeholder="user name" value={userNames} className="input" onChange={(e)=>setUserNames(e.target.value)}/>
+                    <input type="text" placeholder="user name" value={username} className="input" onChange={(e)=>setUserNames(e.target.value)}/>
 
                     <input type={"password"}  placeholder="password" value={password} className="input mt-5 password" onChange={(e)=>setPassword(e.target.value)} />
 
@@ -25,7 +46,7 @@ function Login(props) {
                         <div className="p-3 pr-8"><Link to={"/register"}>Register</Link></div>
                     </div>
                     <div className="justify-end card-actions">
-                        <button className="btn btn-primary" disabled={!userNames||!password} onClick={handelSubmit}>Login</button>
+                        <button  className="btn btn-primary" disabled={!username||!password} onClick={handelSubmit}>Login</button>
                         <button className="btn btn-success ">Register</button>
                     </div>
                 </div>

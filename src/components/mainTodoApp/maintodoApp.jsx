@@ -4,7 +4,7 @@ import Landing from "./Landing/landing.jsx";
 import Login from "./AuthFolder/login.jsx";
 import Register from "./AuthFolder/register.jsx";
 import TodoList from "./toDoList/todoList.jsx";
-function MaintodoApp(props) {
+function MaintodoApp() {
     return (
         <>
 <BrowserRouter>
