@@ -25,7 +25,13 @@ function Login() {
             setLoading(false)
 
         }catch (e){
-            console.log(e.message)
+            // Show alert box if backend indicates an alert
+            const resp = e?.response?.data;
+            if (resp && (resp.alert || resp.alert === true)) {
+                window.alert(resp.message || 'An error occurred');
+            } else {
+                console.log(e.message);
+            }
             setLoading(false)
         }
     }

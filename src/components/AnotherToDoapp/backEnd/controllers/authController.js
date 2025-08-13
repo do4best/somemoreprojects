@@ -31,18 +31,18 @@ async function loginUser(req, res) {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required" });
+      return res.status(400).send({ message: "Username and password are required", alert: true });
     }
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(400).json({ message: "User Not Found" });
+      return res.status(400).send({ message: "User Not Found", alert: true });
     }
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid Password" });
+      return res.status(400).send({ message: "Invalid Password", alert: true });
     }
     if (!secretKey) {
-      return res.status(500).json({ message: "Server misconfiguration: missing JWT secret" });
+      return res.status(500).send({ message: "Server misconfiguration: missing JWT secret", alert: true });
     }
     const token = jwt.sign({ id: user._id }, secretKey, { expiresIn: "1h" });
     const findData = {
