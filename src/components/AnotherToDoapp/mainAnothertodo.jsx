@@ -14,7 +14,7 @@ function MainAnothertodo() {
                     <Route path="/" element={<Landing/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/register" element={<RegisterPage/>}/>
-                    <Route path="/todoapp" element={<TodoApp/>}/>
+                    <Route path="/todo" element={<TodoApp/>}/>
 
 
 

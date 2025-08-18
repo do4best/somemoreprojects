@@ -3,26 +3,43 @@ import {useNavigate} from "react-router";
 import AuthServices from "../../../../mainTodoApp/Services/authServices.js";
 import {Link} from "react-router-dom";
 
-function RegisterPage(props) {
+function RegisterPage() {
     const [username,setUserNames] = useState("")
     const [password,setPassword] = useState("")
     const [loading,setLoading] = useState(false)
     const [firstName,setFirstName] = useState("")
     const [lastName,setLastName] = useState("")
+    const [email,setEmail] = useState("")
+    const [phone,setPhone] = useState("")
     const navigate = useNavigate()
     const handelSubmit = async ()=>{
         console.log("submit")
         try{
             setLoading(true)
             let data = {
+                firstName:""+firstName+"",
+                lastName:""+lastName+"",
+                email:""+email+"",
+                phone:""+phone+"",
                 username:""+username+"",
                 password:""+password+""
             }
-            const response = await AuthServices.loginService(data)
+            const response = await AuthServices.registerService(data)
             console.log(response.data)
-            localStorage.setItem("token",JSON.stringify(response.data))
-            console.log("token is set")
-            navigate("/todo")
+            // Persist token
+            localStorage.setItem("token", JSON.stringify(response.data))
+            // Persist user details so nav can greet immediately
+            try {
+                const payload = response?.data
+                const user = (payload && typeof payload === 'object' && payload.user) ? payload.user : {
+                    firstName, lastName, email, phone, username
+                }
+                localStorage.setItem("todoAppUser", JSON.stringify(user))
+            } catch {
+                localStorage.setItem("todoAppUser", JSON.stringify({ firstName, lastName, email, phone, username }))
+            }
+            console.log("token and user are set")
+            navigate("/login")
             setLoading(false)
 
         }catch (e){
@@ -41,6 +58,12 @@ function RegisterPage(props) {
                             <input type="text" placeholder="First Name" value={firstName} className="input" onChange={(e)=>setFirstName(e.target.value)}/>
 
                             <input type={"text"}  placeholder="Last Name" value={lastName} className="input" onChange={(e)=>setLastName(e.target.value)} />
+                        </div>
+                        <div className="flex flex-row justify-center items-center gap-2 ">
+                            <input type="text" placeholder="Email" value={email} className="input" onChange={(e)=>setEmail(e.target.value)}/>
+
+                            <input type={"text"}  placeholder="Phone" value={phone} className="input" onChange={(e)=>setPhone(e.target.value)} />
+
 
                         </div>
 
@@ -54,7 +77,7 @@ function RegisterPage(props) {
                         </div>
                         <div className="justify-end card-actions">
 
-                            <button className="btn btn-success ">Register</button>
+                            <button className="btn btn-success " onClick={handelSubmit}>Register</button>
                         </div>
                     </div>
                 </div>

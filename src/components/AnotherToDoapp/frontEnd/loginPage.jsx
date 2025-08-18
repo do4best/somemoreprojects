@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import AuthServices from "../../mainTodoApp/Services/authServices.js";
 import {useNavigate} from "react-router";
 
-function LoginPage(props) {
+function LoginPage() {
     const [username,setUserNames] = useState("")
     const [password,setPassword] = useState("")
     const [loading,setLoading] = useState(false)
@@ -18,8 +18,27 @@ function LoginPage(props) {
             }
             const response = await AuthServices.loginService(data)
             console.log(response.data)
-            localStorage.setItem("token",JSON.stringify(response.data))
-            console.log("token is set")
+            // Persist token
+            localStorage.setItem("token", JSON.stringify(response.data))
+            // Persist user details for navbar and pages
+            try {
+                const payload = response?.data
+                if (payload && typeof payload === 'object') {
+                    const user = payload.user || (payload.username ? { username: payload.username } : null)
+                    if (user) {
+                        localStorage.setItem("todoAppUser", JSON.stringify(user))
+                    } else {
+                        // Fallback: at least store the typed username
+                        localStorage.setItem("todoAppUser", JSON.stringify({ username }))
+                    }
+                } else {
+                    // Fallback: at least store the typed username
+                    localStorage.setItem("todoAppUser", JSON.stringify({ username }))
+                }
+            } catch {
+                localStorage.setItem("todoAppUser", JSON.stringify({ username }))
+            }
+            console.log("token and user are set")
             navigate("/todo")
             setLoading(false)
 

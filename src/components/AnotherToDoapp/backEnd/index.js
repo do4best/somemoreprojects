@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {Authrouter} from "./routes/authRoutes.js";
+import {ToDorouter} from "./routes/ToDoRoutes.js";
 
 
 // Ensure .env is loaded from this folder regardless of CWD
@@ -27,6 +28,7 @@ app.use(express.json());
 
 // Mount routes after middleware so req.body is populated
 app.use('/api', Authrouter);
+app.use('/api/todo', ToDorouter);
 
 if (!DB_URL) {
   console.error('Environment variable DB_URL is missing. Ensure .env exists at:', path.join(__dirname, '.env'));

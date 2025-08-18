@@ -1,9 +1,9 @@
 import React from 'react';
-
-function TodoApp(props) {
+import NavigationPage from "../../../navigationPage.jsx";
+function TodoApp() {
     return (
         <>
-        <h1>ToDo App</h1>
+    <NavigationPage active={"myTask"}/>
 
         </>
     );
