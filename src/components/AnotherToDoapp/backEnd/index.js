@@ -10,10 +10,15 @@ import {Authrouter} from "./routes/authRoutes.js";
 import {ToDorouter} from "./routes/ToDoRoutes.js";
 
 
-// Ensure .env is loaded from this folder regardless of CWD
+// Resolve current file/dir
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.join(__dirname, '.env') });
+
+// Load environment variables: try project root first (default), then fallback to backEnd/.env
+dotenv.config();
+if (!process.env.DB_URL || !process.env.JWT_SECRET || !process.env.PORT_NO) {
+  dotenv.config({ path: path.join(__dirname, '.env') });
+}
 
 const isNode = (typeof process !== 'undefined' && process.versions && process.versions.node);
 
@@ -31,7 +36,7 @@ app.use('/api', Authrouter);
 app.use('/api/todo', ToDorouter);
 
 if (!DB_URL) {
-  console.error('Environment variable DB_URL is missing. Ensure .env exists at:', path.join(__dirname, '.env'));
+  console.error('Environment variable DB_URL is missing. Ensure a .env exists at project root or at:', path.join(__dirname, '.env'));
   if (isNode) {
     process.exit(1);
   }

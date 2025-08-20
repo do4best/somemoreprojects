@@ -12,4 +12,38 @@ const createToDo=async (req,res)=>{
         res.status(400).send({message:e?.message || "Registration failed"});
     }
 };
-export {createToDo};
+const getAllToDo=async (req,res)=>{
+    let {userId}=req.params;
+    try{
+const result = await TodoList.find({createdBy:userId});
+res.status(200).send({result});
+    }catch (e) {
+            console.log(e);
+            res.status(400).send({message:e?.message || "Registration failed"});
+    }
+}
+const deleteToDo=async (req,res)=>{
+    try{
+        const {id}=req.params;
+        const result = await TodoList.findByIdAndDelete(id);
+        console.log(result);
+        res.status(200).send({message:"Deleted Successfully"});
+
+    }catch (e){
+        console.log(e);
+        res.status(400).send(e);
+    }
+}
+const updateToDo=async (req,res)=>{
+    try{
+        const {id}=req.params;
+        const data=req.body;
+        const result = await TodoList.findByIdAndUpdate(id,{$set:data},{returnOriginal:false});
+        console.log(result);
+        res.status(200).send({message:"Updated Successfully"});
+    }catch (e){
+        console.log(e);
+        res.status(400).send(e);
+    }
+}
+export {createToDo,getAllToDo,deleteToDo,updateToDo};
