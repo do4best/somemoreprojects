@@ -1,9 +1,29 @@
 import React, { useState } from 'react';
 import NavigationPage from "../../../navigationPage.jsx";
+import {getUserDetails} from "../../../backEnd/Services/utils/getUserDetails.js";
+import ToDoService from "../../../backEnd/Services/toDoServices.js";
 
 function TodoApp() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+
+    const handelSubmitTask = async () => {
+        try {
+            const userId = getUserDetails()?.userId;
+            const data = {
+                title,
+                description,
+                isComplete: false,
+                createdBy: userId,
+            };
+            const response = await ToDoService.createToDo(data);
+            console.log(response);
+            resetForm();
+            closeModal();
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     const openModal = () => {
         const dlg = document.getElementById('my_modal_1');
@@ -22,11 +42,6 @@ function TodoApp() {
 
     const handleCancel = () => {
         resetForm();
-        closeModal();
-    };
-
-    const handleSave = () => {
-        // Placeholder for future save logic (e.g., API call)
         closeModal();
     };
 
@@ -84,7 +99,7 @@ function TodoApp() {
 
                         <div className="modal-action">
                             <button className="btn" onClick={handleCancel}>Cancel</button>
-                            <button className="btn btn-primary" onClick={handleSave}>Save</button>
+                            <button className="btn btn-primary" onClick={handelSubmitTask}>Save</button>
                         </div>
                     </div>
                     <form method="dialog" className="modal-backdrop">
