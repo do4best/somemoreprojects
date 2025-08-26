@@ -1,6 +1,6 @@
 import express from "express";
 import {User} from "../models/user.js";
-import e from "express";
+
 const router = express.Router();
 router.post('/register', async (req, res) => {
     let {firstName, lastName, email, username, password} = req.body;
@@ -29,5 +29,7 @@ router.post('/register', async (req, res) => {
         console.log(err)
         res.status(400).send({message: "Username already exists"});
     }})
+// creating login route
+
 export {router}
 
