@@ -1,12 +1,11 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import {config} from "dotenv";
+import dotenv from 'dotenv';
 import {Authrouter} from "./routes/authRoutes.js";
-
+dotenv.config();
 const app = express();
 
-config();
 app.use(cors());
 app.use(express.json())
 app.use('/api',Authrouter)
@@ -15,6 +14,7 @@ mongoose.connect("mongodb://localhost:27017/lasttodo").then((res)=>{
 }).catch((err)=>{
     console.log(err);
 })
-app.listen(3000,()=>{
-    console.log("server is running on port 3000");
+// eslint-disable-next-line no-undef
+app.listen(process.env.PORT_NO,()=>{
+    console.log("server is running on port 5000");
 });
