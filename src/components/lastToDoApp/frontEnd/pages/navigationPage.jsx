@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {getUserDetails} from "./backEnd/Services/utils/getUserDetails.js";
+import {getUserDetails} from "../../backEnd/services/utils/getUserDetails.js";
 import {useNavigate} from "react-router";
 
 function NavigationPage({active}) {
@@ -18,14 +18,14 @@ function NavigationPage({active}) {
     }
     return (
         <>
-            <div className="navbar bg-base-100 shadow-sm">
-                <div className="flex-1">
-                    <Link to={"/"} className="btn btn-error text-xl hover:bg-green-600" >To Do's</Link>
+            <div className=" navbar bg-base-100 shadow-sm ">
+                <div className=" flex-1">
+                    <Link to={"/"} className="btn btn-error text-xl hover:bg-blue-600" >To Do's</Link>
 
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
-                        <li> <Link to={"/"} className={active === 'home' && 'activeNav'} >Home</Link></li>
+                        <li> <Link to={"/"} className={active === 'home' && 'bg-red-500'} >Home</Link></li>
                         {user && <li> <Link to={"/todo"} className={active === 'myTask' && 'activeNav'} >My Task</Link></li>}
                         {user ? (
                             <>

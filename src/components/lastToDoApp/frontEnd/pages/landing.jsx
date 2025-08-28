@@ -1,12 +1,12 @@
 import React from 'react';
-import NavigationPage from "../../../navigationPage.jsx";
+import NavigationPage from "../pages/navigationPage.jsx";
 import {Link} from "react-router-dom";
-import img1 from "../../../../../assets/mytodo.jpeg"
+import img1 from "../../../../assets/mytodo.jpeg"
 function Landing(props) {
     return (
         <>
         <div>
-        <NavigationPage/>
+        <NavigationPage active={"home"}/>
         <div className=" flex flex-row justify-between items-center flex-nowrap gap-2 mt-50">
             <div>
                 <h1 className={"text-8xl font-extrabold"}>Schedule your Task with <span className={"text-success"}>Todos</span></h1>

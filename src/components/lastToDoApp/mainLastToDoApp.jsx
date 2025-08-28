@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router";
-import Landing from "../AnotherToDoapp/frontEnd/pages/Landing/landing.jsx";
-import LoginPage from "../AnotherToDoapp/frontEnd/loginPage.jsx";
-import RegisterPage from "../AnotherToDoapp/frontEnd/pages/Auth/registerPage.jsx";
-import TodoApp from "../AnotherToDoapp/frontEnd/pages/todo/todoApp.jsx";
+import Landing from "../lastToDoApp/frontEnd/pages/landing.jsx";
+import LoginPage from "../lastToDoApp/frontEnd/pages/loginPage.jsx";
+import RegisterPage from "../lastToDoApp/frontEnd/pages/registerPage.jsx";
+import TodoApp from "../lastToDoApp/frontEnd/pages/todoApp.jsx";
 
 function MainLastToDoApp(props) {
     return (

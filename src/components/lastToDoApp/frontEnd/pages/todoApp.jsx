@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import NavigationPage from "../../../navigationPage.jsx";
-import {getUserDetails} from "../../../backEnd/Services/utils/getUserDetails.js";
-import ToDoService from "../../../backEnd/Services/toDoServices.js";
+import NavigationPage from "../pages/navigationPage.jsx";
+import {getUserDetails} from "../../backEnd/Services/utils/getUserDetails.js";
+import ToDoService from "../../backEnd/Services/toDoServices.js";
 
 function TodoApp() {
     const [title, setTitle] = useState("");

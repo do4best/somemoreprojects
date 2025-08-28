@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router";
-import AuthServices from "../../../../mainTodoApp/Services/authServices.js";
+import AuthServices from "../../backEnd/Services/authServices.js";
 import {Link} from "react-router-dom";
 
 function RegisterPage() {
